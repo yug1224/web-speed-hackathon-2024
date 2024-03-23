@@ -1,5 +1,3 @@
-import clamp from 'lodash/clamp';
-import floor from 'lodash/floor';
 import { useState } from 'react';
 import { useInterval, useUpdate } from 'react-use';
 import styled from 'styled-components';
@@ -13,7 +11,7 @@ const IMAGE_HEIGHT = 1518;
 const MIN_VIEWER_HEIGHT = 500;
 const MAX_VIEWER_HEIGHT = 650;
 
-const MIN_PAGE_WIDTH = floor((MIN_VIEWER_HEIGHT / IMAGE_HEIGHT) * IMAGE_WIDTH);
+const MIN_PAGE_WIDTH = Math.floor((MIN_VIEWER_HEIGHT / IMAGE_HEIGHT) * IMAGE_WIDTH);
 
 const _Container = styled.div`
   position: relative;
@@ -49,6 +47,18 @@ export const ComicViewer: React.FC<Props> = ({ episodeId }) => {
   const candidatePageWidth = (100 * cqw) / pageCountParView;
   // 1ページの高さの候補
   const candidatePageHeight = (candidatePageWidth / IMAGE_WIDTH) * IMAGE_HEIGHT;
+
+  const clamp = (number, boundOne, boundTwo) => {
+    if (!boundTwo) {
+      return Math.max(number, boundOne) === boundOne ? number : boundOne;
+    } else if (Math.min(number, boundOne) === number) {
+      return boundOne;
+    } else if (Math.max(number, boundTwo) === number) {
+      return boundTwo;
+    }
+    return number;
+  };
+
   // ビュアーの高さ
   const viewerHeight = clamp(candidatePageHeight, MIN_VIEWER_HEIGHT, MAX_VIEWER_HEIGHT);
 
