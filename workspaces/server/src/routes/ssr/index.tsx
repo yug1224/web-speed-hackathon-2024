@@ -58,12 +58,12 @@ async function createHTML({
     .replaceAll(
       '<script id="inject-data" type="application/json"></script>',
       `<script id="inject-data" type="application/json">
-        ${jsesc(injectData, {
-          isScriptContext: true,
-          json: true,
-          minimal: true,
-        })}
-      </script>`,
+      ${jsesc(injectData, {
+        isScriptContext: true,
+        json: true,
+        minimal: true,
+      })}
+    </script>`,
     );
 
   return content;
@@ -83,7 +83,11 @@ app.get('*', async (c) => {
     );
 
     const styleTags = sheet.getStyleTags();
-    const html = await createHTML({ body, injectData, styleTags });
+    const html = await createHTML({
+      body,
+      injectData,
+      styleTags,
+    });
 
     return c.html(html);
   } catch (cause) {
