@@ -8,7 +8,7 @@ import invariant from 'tiny-invariant';
 import { FavoriteBookAtomFamily } from '../../features/book/atoms/FavoriteBookAtomFamily';
 import { useBook } from '../../features/book/hooks/useBook';
 import { EpisodeListItem } from '../../features/episode/components/EpisodeListItem';
-import { useEpisodeList } from '../../features/episode/hooks/useEpisodeList';
+// import { useEpisodeList } from '../../features/episode/hooks/useEpisodeList';
 import { Box } from '../../foundation/components/Box';
 import { Flex } from '../../foundation/components/Flex';
 import { Image } from '../../foundation/components/Image';
@@ -50,7 +50,8 @@ const BookDetailPage: React.FC = () => {
   invariant(bookId);
 
   const { data: book } = useBook({ params: { bookId } });
-  const { data: episodeList } = useEpisodeList({ query: { bookId } });
+  // const { data: episodeList } = useEpisodeList({ query: { bookId } });
+  const episodeList = book?.episodes ?? [];
 
   const [isFavorite, toggleFavorite] = useAtom(FavoriteBookAtomFamily(bookId));
 
