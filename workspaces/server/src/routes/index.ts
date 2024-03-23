@@ -1,7 +1,6 @@
 import { Hono } from "hono";
 import { cors } from "hono/cors";
 import { HTTPException } from "hono/http-exception";
-import { logger } from "hono/logger";
 import { secureHeaders } from "hono/secure-headers";
 
 import { cacheControlMiddleware } from "../middlewares/cacheControlMiddleware";
@@ -14,7 +13,7 @@ import { ssrApp } from "./ssr";
 import { staticApp } from "./static";
 
 const app = new Hono();
-app.use(logger());
+
 app.use(secureHeaders());
 app.use(
   cors({
