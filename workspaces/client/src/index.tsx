@@ -12,7 +12,7 @@ import { registerServiceWorker } from './utils/registerServiceWorker';
 
 const main = async () => {
   await registerServiceWorker();
-  // await preloadImages();
+  await preloadImages();
 
   const callback = () => {
     if (window.location.pathname.startsWith('/admin')) {
