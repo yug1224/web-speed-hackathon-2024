@@ -8,7 +8,7 @@ import invariant from 'tiny-invariant';
 import { FavoriteBookAtomFamily } from '../../features/book/atoms/FavoriteBookAtomFamily';
 import { useBook } from '../../features/book/hooks/useBook';
 import { EpisodeListItem } from '../../features/episode/components/EpisodeListItem';
-// import { useEpisodeList } from '../../features/episode/hooks/useEpisodeList';
+import { useEpisodeList } from '../../features/episode/hooks/useEpisodeList';
 import { Box } from '../../foundation/components/Box';
 import { Flex } from '../../foundation/components/Flex';
 import { Image } from '../../foundation/components/Image';
@@ -50,13 +50,12 @@ const BookDetailPage: React.FC = () => {
   invariant(bookId);
 
   const { data: book } = useBook({ params: { bookId } });
-  // const { data: episodeList } = useEpisodeList({ query: { bookId } });
-  const episodeList = book?.episodes ?? [];
+  const { data: episodeList } = useEpisodeList({ query: { bookId } });
 
   const [isFavorite, toggleFavorite] = useAtom(FavoriteBookAtomFamily(bookId));
 
   const bookImageUrl = useImage({ height: 256, imageId: book.image.id, width: 192 });
-  const auhtorImageUrl = useImage({ height: 32, imageId: book.author.image.id, width: 32 });
+  const authorImageUrl = useImage({ height: 32, imageId: book.author.image.id, width: 32 });
 
   const handleFavClick = useCallback(() => {
     toggleFavorite();
@@ -84,9 +83,9 @@ const BookDetailPage: React.FC = () => {
           <Spacer height={Space * 1} />
 
           <_AuthorWrapper href={`/authors/${book.author.id}`}>
-            {auhtorImageUrl != null && (
+            {authorImageUrl != null && (
               <_AvatarWrapper>
-                <Image alt={book.author.name} height={32} objectFit="cover" src={auhtorImageUrl} width={32} />
+                <Image alt={book.author.name} height={32} objectFit="cover" src={authorImageUrl} width={32} />
               </_AvatarWrapper>
             )}
             <Text color={Color.MONO_100} typography={Typography.NORMAL14}>
@@ -108,7 +107,7 @@ const BookDetailPage: React.FC = () => {
       <section aria-label="エピソード一覧">
         <Flex align="center" as="ul" direction="column" justify="center">
           {episodeList.map((episode) => (
-            <EpisodeListItem key={episode.id} bookId={bookId} episodeId={episode.id} />
+            <EpisodeListItem key={episode.id} bookId={bookId} episode={episode} />
           ))}
           {episodeList.length === 0 && (
             <>
