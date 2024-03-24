@@ -51,8 +51,8 @@ export default defineConfig(async (): Promise<Options[]> => {
           },
           polyfills: {
             events: true,
-            fs: false,
-            path: false,
+            fs: true,
+            path: true,
           },
         }),
       ],

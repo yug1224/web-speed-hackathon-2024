@@ -31,9 +31,9 @@ app.use(
     origin: (origin) => origin,
   }),
 );
+app.use(compress());
 app.use(compressMiddleware);
 app.use(cacheControlMiddleware);
-app.use(compress());
 
 app.get("/healthz", (c) => {
   return c.body("live", 200);
