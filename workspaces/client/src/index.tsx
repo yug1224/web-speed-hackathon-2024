@@ -11,7 +11,7 @@ import { preloadImages } from './utils/preloadImages';
 import { registerServiceWorker } from './utils/registerServiceWorker';
 
 const main = async () => {
-  await registerServiceWorker();
+  // await registerServiceWorker();
   // await preloadImages();
 
   const callback = () => {

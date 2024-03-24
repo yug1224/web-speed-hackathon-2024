@@ -1,7 +1,8 @@
 import { Hono } from "hono";
+import { compress } from "hono/compress";
 import { cors } from "hono/cors";
 import { HTTPException } from "hono/http-exception";
-import { logger } from "hono/logger";
+// import { logger } from "hono/logger";
 import { secureHeaders } from "hono/secure-headers";
 
 import { cacheControlMiddleware } from "../middlewares/cacheControlMiddleware";
@@ -14,7 +15,8 @@ import { ssrApp } from "./ssr";
 import { staticApp } from "./static";
 
 const app = new Hono();
-app.use(logger());
+// app.use(logger());
+app.use(compress());
 app.use(secureHeaders());
 app.use(
   cors({
