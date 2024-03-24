@@ -120,12 +120,12 @@ importers:
       csstype:
         specifier: 3.1.3
         version: 3.1.3
+      dayjs:
+        specifier: 1.11.10
+        version: 1.11.10
       jotai:
         specifier: 2.7.0
         version: 2.7.0(@types/react@18.2.0)(react@18.2.0)
-      moment-timezone:
-        specifier: 0.5.45
-        version: 0.5.45
       react:
         specifier: 18.2.0
         version: 18.2.0
@@ -5022,6 +5022,10 @@ packages:
   /date-format@4.0.14:
     resolution: {integrity: sha512-39BOQLs9ZjKh0/patS9nrT8wc3ioX3/eA/zgbKNopnF2wCqJEoxywwwElATYvRsXdnOxA/OQeQoFZ3rFjVajhg==}
     engines: {node: '>=4.0'}
+    dev: false
+
+  /dayjs@1.11.10:
+    resolution: {integrity: sha512-vjAczensTgRcqDERK0SR2XMwsF/tSvnvlv6VcF2GIhg6Sx4yOIt/irsr1RDJsKiIyBzJDpCoXiWWq28MqH2cnQ==}
     dev: false
 
   /debug@3.2.7:

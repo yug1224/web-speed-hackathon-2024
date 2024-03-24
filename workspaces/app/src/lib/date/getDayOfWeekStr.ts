@@ -1,12 +1,20 @@
-import type moment from 'moment-timezone';
+import type dayjs from "dayjs";
 
-const days = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'] as const;
+const days = [
+  "sunday",
+  "monday",
+  "tuesday",
+  "wednesday",
+  "thursday",
+  "friday",
+  "saturday",
+] as const;
 
-export const getDayOfWeekStr = (date: moment.Moment) => {
+export const getDayOfWeekStr = (date: dayjs.Dayjs) => {
   const dayOfWeek = date.day();
   const dayStr = days.at(dayOfWeek);
   if (dayStr == null) {
-    throw new Error('dayOfWeek is invalid');
+    throw new Error("dayOfWeek is invalid");
   }
   return dayStr;
 };
