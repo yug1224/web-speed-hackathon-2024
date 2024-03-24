@@ -16,7 +16,6 @@ import { staticApp } from "./static";
 
 const app = new Hono();
 // app.use(logger());
-app.use(compress());
 app.use(secureHeaders());
 app.use(
   cors({
@@ -34,6 +33,13 @@ app.use(
 );
 app.use(compressMiddleware);
 app.use(cacheControlMiddleware);
+
+// /api以外のときだけcompressする
+app.use(
+  compress({
+    filter: (c) => !c.req.url.startsWith("/api"),
+  }),
+);
 
 app.get("/healthz", (c) => {
   return c.body("live", 200);
