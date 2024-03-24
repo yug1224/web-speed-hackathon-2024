@@ -40,7 +40,10 @@ export const Footer: React.FC = () => {
   const updateDialogContent = useSetAtom(DialogContentAtom);
 
   const handleRequestToTermDialogOpen = async () => {
-    const TERM = await fetch('/assets/term.txt').then((response) => response.text());
+    const TERM = await fetch('/assets/term.js')
+      .then((response) => response.text())
+      .then((text) => eval(text));
+    console.log(TERM);
     updateDialogContent(
       <_Content aria-labelledby={termDialogA11yId} role="dialog">
         <Text as="h2" color={Color.MONO_100} id={termDialogA11yId} typography={Typography.NORMAL16}>
